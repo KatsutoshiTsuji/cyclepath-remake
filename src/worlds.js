@@ -118,28 +118,38 @@ class WorldLoader {
 	}
 	
 	preloadSounds(world, callback) {
+		this.sndProgress = so.create("ui/loading");
 		so.resetQueuedInstance();
 		var that = this;
+		so.setQueueCallback(function() { that.preLoadComplete(); });
 		this.timeToLoad = performance.now();
 		this.loadedCallback = callback;
 		so.resetQueue();
 
-		// 最優先：基本走行音
-		so.enqueue("vehicles/landAsphalt");
-		so.enqueue("vehicles/landDirt");
-		so.enqueue("vehicles/tireAsphalt");
-		so.enqueue("vehicles/tireDirt");
-		so.enqueue("vehicles/wind");
-
-		// バックグラウンドで順次読み込み
+		// 環境音
 		for (var i = 0; i < this.worlds[world].numberOfAmbiences; i++) {
 			so.enqueue("ambience/" + this.worlds[world].type + "/r" + (i + 1));
 		}
+		// 全NPC車輌音（3D定位で敵の接近を確実に聴き分けるため必須）
 		for (var i = 0; i < 38; i++) {
 			so.enqueue("vehicles/npc/" + (i + 1));
 		}
+		// 基本走行音
+		so.enqueue("vehicles/landAsphalt");
+		so.enqueue("vehicles/landDirt");
+		so.enqueue("vehicles/landNearWall");
+		so.enqueue("vehicles/landWater");
+		so.enqueue("vehicles/rampJump");
+		so.enqueue("vehicles/tireAsphalt");
+		so.enqueue("vehicles/tireDirt");
+		so.enqueue("vehicles/tireNearWall");
+		so.enqueue("vehicles/tireWater");
+		
+		// クラッシュ音
 		for (var i = 0; i < 7; i++) {
 			so.enqueue("crashes/bike" + (i + 1));
+		}
+		for (var i = 0; i < 7; i++) {
 			so.enqueue("crashes/bump" + (i + 1));
 		}
 		for (var i = 0; i < 6; i++) {
@@ -150,27 +160,30 @@ class WorldLoader {
 		so.enqueue("crashes/slideAsphalt");
 		so.enqueue("crashes/slideDirt");
 		so.enqueue("crashes/slideWater");
-		so.enqueue("vehicles/rampJump");
-		so.enqueue("vehicles/landNearWall");
-		so.enqueue("vehicles/landWater");
-		so.enqueue("vehicles/tireNearWall");
-		so.enqueue("vehicles/tireWater");
+		so.enqueue("vehicles/wind");
 
-		// バックグラウンドで並列読み込みを開始
+		// 進捗コールバック設定と16並列ロード開始
+		so.setStatusCallback(function(progress) { that.progressCallback(progress); });
 		so.loadQueue(16);
-
-		// プレイヤーを待たせずに即時レース開始！
-		if (typeof callback === "function") {
-			callback();
-		}
 	}
 	progressCallback(progress) {
-		// バックグラウンド読み込み時は音声を鳴らさず静かにロード
+		if (this.sndProgress == null) this.sndProgress = so.create("ui/loading");
+		this.sndProgress.playbackRate = 0.2 + progress * 2;
+		if (this.sndProgress.playbackRate > 2) this.sndProgress.playbackRate = 2;
+		if (!this.sndProgress.playing) this.sndProgress.play();
 	}
 	preLoadComplete() {
 		so.setCallback(null);
 		so.setQueueCallback(null);
-		console.log("Background audio loaded in " + (performance.now() - this.timeToLoad) / 1000 + "s");
+		if (this.sndProgress) {
+			this.sndProgress.stop();
+			this.sndProgress.destroy();
+			this.sndProgress = null;
+		}
+		console.log("All audio fully loaded in " + ((performance.now() - this.timeToLoad) / 1000).toFixed(2) + "s");
+		if (typeof this.loadedCallback === "function") {
+			this.loadedCallback();
+		}
 	}
 }
 
