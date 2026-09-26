@@ -1,0 +1,85 @@
+{
+  "mainMenu": {
+    "title": "メインメニュー",
+    "play": "レース開始",
+    "achievements": "実績",
+    "unlocked": "解除済み",
+    "all": "すべて",
+    "viewAchievements": "実績を見る",
+    "shop": "ショップ",
+    "options": "オプション",
+    "statistics": "戦績",
+    "credits": "クレジット"
+  },
+  "raceMenu": {
+    "title": "レース設定",
+    "bike": "バイク",
+    "world": "ワールド",
+    "worlds": {
+      "Farm": "農道",
+      "Highway": "高速道路",
+      "City": "市街地",
+      "Beach": "ビーチ",
+      "Jungle": "ジャングル"
+    },
+    "turnMode": "ステアリング",
+    "turnModes": {
+      "Classic": "クラシック",
+      "Modern": "モダン"
+    },
+    "ramps": "ジャンプ台",
+    "tunnels": "トンネル",
+    "freeRun": "フリーラン（無敵）",
+    "freeRunModes": {
+      "Off": "オフ",
+      "Respawn": "復活あり",
+      "Invincible": "完全無敵"
+    },
+    "lethalWalls": "壁衝突死",
+    "on": "オン",
+    "off": "オフ",
+    "start": "スタート",
+    "goBack": "戻る"
+  },
+  "options": {
+    "title": "オプション",
+    "language": "言語",
+    "languages": {
+      "ja": "日本語",
+      "en": "English"
+    },
+    "surround": "3D立体音響",
+    "effects": "環境エフェクト",
+    "gyro": "ジャイロセンサー",
+    "webTTS": "Web音声合成",
+    "webTTSModes": {
+      "on": "オン",
+      "off": "オフ（NVDA等のARIA読み上げ）"
+    },
+    "save": "設定を保存"
+  },
+  "stats": {
+    "title": "戦績",
+    "name": "名前",
+    "numberOfGames": "プレイ回数",
+    "numberOfCars": "追い抜いた車の数",
+    "playTime": "総プレイ時間",
+    "minutes": "分",
+    "totalScore": "総スコア",
+    "distance": "総走行距離",
+    "meters": "メートル",
+    "coins": "所持コイン"
+  },
+  "game": {
+    "loading": "読み込み中...",
+    "achievementUnlocked": "実績解除！",
+    "result": "【リザルト】\n走行距離: {distance} メートル\n獲得スコア: {score}\n到達レベル: {level}\n拾ったコイン: {coins} 枚"
+  },
+  "creditsInfo": {
+    "title": "クレジット",
+    "original": "原作ゲーム開発・音響: Talon (DragonApps)",
+    "license": "ライセンス: ISC License (オープンソース)",
+    "remake": "リメイク・日本語化・アクセシビリティ強化・車輌追加: 辻勝利 (Debugon)",
+    "thanks": "Special Thanks: NVDA 日本語コミュニティ & オーディオゲームコミュニティ"
+  }
+}

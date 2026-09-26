@@ -1,0 +1,7 @@
+node_modules/
+dist/
+client/
+cyclepath_dist.zip
+Suzuki/
+.DS_Store
+Thumbs.db

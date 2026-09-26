@@ -1,0 +1,29 @@
+cyclepath.duckdns.org {
+    root * /var/www/cyclepath
+    encode zstd gzip
+
+    @static {
+        path *.opus *.m4a *.js *.css *.png *.jpg *.woff2
+    }
+    header @static Cache-Control "public, max-age=31536000, immutable"
+
+    file_server
+}
+
+a11ypoker.duckdns.org {
+    handle_path /cyclepath* {
+        root * /var/www/cyclepath
+        encode zstd gzip
+
+        @static {
+            path *.opus *.m4a *.js *.css *.png *.jpg *.woff2
+        }
+        header @static Cache-Control "public, max-age=31536000, immutable"
+
+        file_server
+    }
+
+    handle {
+        reverse_proxy 127.0.0.1:5000
+    }
+}

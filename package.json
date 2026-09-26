@@ -1,0 +1,22 @@
+{
+  "name": "cyclepath-remake",
+  "version": "0.6.0-dev",
+  "description": "Cyclepath Audio Game - Modern Remake & Accessibility Enhancement",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@hughsk/fulltilt": "^0.7.1",
+    "gyronorm": "^2.0.6",
+    "hammerjs": "^2.0.8",
+    "jquery": "^3.7.1",
+    "nosleep.js": "^0.12.0",
+    "sono": "^2.1.4"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}

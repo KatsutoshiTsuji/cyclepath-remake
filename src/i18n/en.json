@@ -1,0 +1,85 @@
+{
+  "mainMenu": {
+    "title": "Main menu",
+    "play": "Play",
+    "achievements": "Achievements",
+    "unlocked": "Unlocked",
+    "all": "All",
+    "viewAchievements": "View Achievements",
+    "shop": "Shop",
+    "options": "Options",
+    "statistics": "Statistics",
+    "credits": "Credits"
+  },
+  "raceMenu": {
+    "title": "Setup",
+    "bike": "Bike",
+    "world": "World",
+    "worlds": {
+      "Farm": "Farm",
+      "Highway": "Highway",
+      "City": "City",
+      "Beach": "Beach",
+      "Jungle": "Jungle"
+    },
+    "turnMode": "Turn mode",
+    "turnModes": {
+      "Classic": "Classic",
+      "Modern": "Modern"
+    },
+    "ramps": "Ramps",
+    "tunnels": "Tunnels",
+    "freeRun": "Free Run",
+    "freeRunModes": {
+      "Off": "Off",
+      "Respawn": "Respawn",
+      "Invincible": "Invincible"
+    },
+    "lethalWalls": "Lethal Walls",
+    "on": "On",
+    "off": "Off",
+    "start": "Start",
+    "goBack": "Go back"
+  },
+  "options": {
+    "title": "Options",
+    "language": "Language",
+    "languages": {
+      "ja": "日本語",
+      "en": "English"
+    },
+    "surround": "Virtual Surround",
+    "effects": "Effects",
+    "gyro": "Gyroscope",
+    "webTTS": "Use WebTTS",
+    "webTTSModes": {
+      "on": "On",
+      "off": "Off (Screen Reader Aria-live)"
+    },
+    "save": "Save"
+  },
+  "stats": {
+    "title": "Statistics",
+    "name": "Name",
+    "numberOfGames": "Number of games",
+    "numberOfCars": "Number of cars passed",
+    "playTime": "Playtime",
+    "minutes": "minutes",
+    "totalScore": "Total score",
+    "distance": "Distance travelled",
+    "meters": "meters",
+    "coins": "Coins"
+  },
+  "game": {
+    "loading": "Loading...",
+    "achievementUnlocked": "Achievement unlocked!",
+    "result": "Here's some stuff about your game.\nYou traveled {distance} meters.\nYour score accumulated this game is {score}.\nYou got to level {level}.\nYou collected {coins} coins"
+  },
+  "creditsInfo": {
+    "title": "Credits",
+    "original": "Original Game & Audio Design: Talon (DragonApps)",
+    "license": "License: ISC License (Open Source)",
+    "remake": "Remake, Japanese Localization, Accessibility & Extra Bikes: Katsutoshi Tsuji (Debugon)",
+    "thanks": "Special Thanks: NVDA Japanese Community & Audio Games Community"
+  }
+}
