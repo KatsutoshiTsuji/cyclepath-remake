@@ -117,7 +117,11 @@ class WorldLoader {
 		return this.worlds[number];
 	}
 	
-	preloadSounds(world, callback) {
+	preloadSounds(world, bike, callback) {
+		if (typeof bike === "function") {
+			callback = bike;
+			bike = null;
+		}
 		this.sndProgress = so.create("ui/loading");
 		so.resetQueuedInstance();
 		var that = this;
@@ -126,14 +130,20 @@ class WorldLoader {
 		this.loadedCallback = callback;
 		so.resetQueue();
 
-		// 環境音
-		for (var i = 0; i < this.worlds[world].numberOfAmbiences; i++) {
-			so.enqueue("ambience/" + this.worlds[world].type + "/r" + (i + 1));
+		// 【最優先】自車バイクの全エンジン音
+		if (bike && bike.engineType) {
+			var engineType = bike.engineType;
+			so.enqueue("vehicles/" + engineType + "/start");
+			so.enqueue("vehicles/" + engineType + "/idle");
+			so.enqueue("vehicles/" + engineType + "/decelerate");
+			so.enqueue("vehicles/" + engineType + "/high");
+			so.enqueue("vehicles/" + engineType + "/shift");
+			var maxAcc = bike.maxAccelerate || 2;
+			for (var a = 1; a <= maxAcc; a++) {
+				so.enqueue("vehicles/" + engineType + "/accelerate" + a);
+			}
 		}
-		// 全NPC車輌音（3D定位で敵の接近を確実に聴き分けるため必須）
-		for (var i = 0; i < 38; i++) {
-			so.enqueue("vehicles/npc/" + (i + 1));
-		}
+
 		// 基本走行音
 		so.enqueue("vehicles/landAsphalt");
 		so.enqueue("vehicles/landDirt");
@@ -144,12 +154,19 @@ class WorldLoader {
 		so.enqueue("vehicles/tireDirt");
 		so.enqueue("vehicles/tireNearWall");
 		so.enqueue("vehicles/tireWater");
-		
+		so.enqueue("vehicles/wind");
+
+		// 環境音
+		for (var i = 0; i < this.worlds[world].numberOfAmbiences; i++) {
+			so.enqueue("ambience/" + this.worlds[world].type + "/r" + (i + 1));
+		}
+		// 全NPC車輌音
+		for (var i = 0; i < 38; i++) {
+			so.enqueue("vehicles/npc/" + (i + 1));
+		}
 		// クラッシュ音
 		for (var i = 0; i < 7; i++) {
 			so.enqueue("crashes/bike" + (i + 1));
-		}
-		for (var i = 0; i < 7; i++) {
 			so.enqueue("crashes/bump" + (i + 1));
 		}
 		for (var i = 0; i < 6; i++) {
@@ -160,7 +177,6 @@ class WorldLoader {
 		so.enqueue("crashes/slideAsphalt");
 		so.enqueue("crashes/slideDirt");
 		so.enqueue("crashes/slideWater");
-		so.enqueue("vehicles/wind");
 
 		// 進捗コールバック設定と16並列ロード開始
 		so.setStatusCallback(function(progress) { that.progressCallback(progress); });

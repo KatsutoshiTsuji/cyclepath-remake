@@ -135,11 +135,9 @@ class Game {
 		
 		speech.speak(t("game.loading"));
 		var that = this;
-		if (typeof this.lastWorld == null || this.lastWorld != worldIndex) {
-			worldLoader.preloadSounds(worldIndex, function() { that.initWorld(worldIndex, bike, worldLoader, options); });
-		} else {
-			this.initWorld(worldIndex, bike, worldLoader, options);
-		}
+		worldLoader.preloadSounds(worldIndex, bike, function() {
+			that.initWorld(worldIndex, bike, worldLoader, options);
+		});
 	}
 	
 	initWorld(id, bike, world, options, achievementWatcher) {
