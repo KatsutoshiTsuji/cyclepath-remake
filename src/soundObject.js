@@ -54,11 +54,13 @@ class SoundObject {
 		this.completedQueueCount = 0;
 		this.statusCallback = null;
 		
+		var basePath = (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.BASE_URL) ? import.meta.env.BASE_URL : "./";
+		if (!basePath.endsWith('/')) basePath += '/';
 		if (sono.canPlay.opus) {
-			this.directory = "/soundsopus/";
+			this.directory = basePath + "soundsopus/";
 			this.extension = ".opus";
 		} else {
-			this.directory = "/soundsm4a/";
+			this.directory = basePath + "soundsm4a/";
 			this.extension = ".m4a";
 		}
 		
