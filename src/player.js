@@ -196,18 +196,24 @@ class Player {
 		this.turnDirection = 0;
 		// this.theta = 0.5*Math.PI;
 	}
-	crash(speed) {
+	crash(speed, reason = "unknown") {
 		if (this.invincible) return;
 		if (this.ragdoll == false) {
+			this.crashReason = reason;
+			console.warn("💥 CRASH:", reason, {
+				playerX: Math.round(this.x),
+				playerZ: Math.round(this.z),
+				speed: this.speed.toFixed(2),
+				theta: this.theta.toFixed(2)
+			});
 			if (speed == 0) speed = 1;
 			this.sndBikeCrash.play();
 			this.crashed = true;
 			this.engine.stopEngine();
 			this.ragdoll = true;
-			this.speed = 1+(this.speed+speed);
-			this.ySpeed = (this.speed+speed);
+			this.speed = 1 + (this.speed + speed);
+			this.ySpeed = (this.speed + speed);
 			this.turnDirection = utils.getRandomArbitrary(-0.1, 0.1);
-			// this.ragdollSubtract = 1+speed*1.5;
 			this.flying = true;
 		}
 	}

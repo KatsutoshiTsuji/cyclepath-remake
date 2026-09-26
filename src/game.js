@@ -160,7 +160,10 @@ class Game {
 	
 	showScore(gameStats) {
 		var that = this;
-		var resultText = t("game.result", {
+		var reasonKey = gameStats.crashReason || "unknown";
+		var reasonText = t("game.crashReasons." + reasonKey) || t("game.crashReasons.unknown");
+		var resultText = t("game.resultWithReason", {
+			reason: reasonText,
 			distance: Math.round(gameStats.travelDistance / 100),
 			score: Math.round(gameStats.score),
 			level: Math.round(gameStats.level),

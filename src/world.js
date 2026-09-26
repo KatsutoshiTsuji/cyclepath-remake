@@ -319,28 +319,25 @@ class World {
 		} else if(this.player.x > this.rightEdge) {
 			if (!this.edgeTerrain.playing) this.edgeTerrain.play();
 			this.edgeTerrain.pos(this.rightBorder, 0, this.player.z);
-			
 			this.edgeTerrain.setSpeed(this.player.speed);
-			
 		} else {
 			this.edgeTerrain.stop();
 		}
 		
 		if (this.lethalWalls == true) {
-			if (this.player.x < this.leftBorder || this.player.x > this.rightBorder) {
-			
-				if (this.player.ragdoll == false) this.player.crash(this.player.speed);
-				
+			if (this.player.x < this.leftBorder) {
+				if (this.player.ragdoll == false) this.player.crash(this.player.speed, "left_wall");
+			} else if (this.player.x > this.rightBorder) {
+				if (this.player.ragdoll == false) this.player.crash(this.player.speed, "right_wall");
 			}
 		} else {
 			if (this.player.x < this.leftBorder) {
 				this.player.x = this.leftBorder;
-				this.player.theta -= utils.getRandomArbitrary(0.1, 0.2);;
+				this.player.theta -= utils.getRandomArbitrary(0.1, 0.2);
 			} else if (this.player.x > this.rightBorder) {
 				this.player.theta += utils.getRandomArbitrary(0.1, 0.2);
 				this.player.x = this.rightBorder;
 			}
-			
 		}
 	}
 	
@@ -503,7 +500,7 @@ class World {
 	
 	
 	handleColisions() {
-		for (var i=0;i<this.enemies.length;i++) {
+		for (var i = 0; i < this.enemies.length; i++) {
 			if (utils.isCollide3D(this.player, this.enemies[i])) {
 				if (this.player.invincible == true) {
 					this.enemies[i].sndBump.play();
@@ -511,8 +508,8 @@ class World {
 				} else if (this.player.ragdoll == true) {
 					this.player.continueCrash(this.enemies[i].speed);
 				} else {
-					if (utils.distance3D(this.enemies[i].x, this.enemies[i].y, this.enemies[i].z, this.player.x, this.player.y, this.player.z) < this.enemies[i].width/4) {
-						this.player.crash(this.enemies[i].speed);
+					if (utils.distance3D(this.enemies[i].x, this.enemies[i].y, this.enemies[i].z, this.player.x, this.player.y, this.player.z) < this.enemies[i].width / 4) {
+						this.player.crash(this.enemies[i].speed, "vehicle");
 					} else {
 						this.enemies[i].sndBump.play();
 						this.increaseScore(this.scoreData.scrapeCar);
@@ -524,13 +521,12 @@ class World {
 	checkPlayer() {
 		if (this.player.isDead && this.player.canRespawn == false) {
 			this.active = false;
-			
+			this.gameStats.crashReason = this.player.crashReason || "unknown";
 			this.destroy();
-
 			this.endCallback(this.gameStats);
 		}
-		this.gameStats.travelDistance += this.player.speed*Math.sin(this.player.theta);
-		this.playerStats.travelDistance += this.player.speed*Math.sin(this.player.theta);
+		this.gameStats.travelDistance += this.player.speed * Math.sin(this.player.theta);
+		this.playerStats.travelDistance += this.player.speed * Math.sin(this.player.theta);
 	}
 	
 	checkScore() {

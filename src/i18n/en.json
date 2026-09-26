@@ -73,7 +73,14 @@
   "game": {
     "loading": "Loading...",
     "achievementUnlocked": "Achievement unlocked!",
-    "result": "Here's some stuff about your game.\nYou traveled {distance} meters.\nYour score accumulated this game is {score}.\nYou got to level {level}.\nYou collected {coins} coins"
+    "result": "Here's some stuff about your game.\nYou traveled {distance} meters.\nYour score accumulated this game is {score}.\nYou got to level {level}.\nYou collected {coins} coins",
+    "resultWithReason": "Game Over!\nCause: {reason}\nYou traveled {distance} meters.\nYour score accumulated this game is {score}.\nYou got to level {level}.\nYou collected {coins} coins",
+    "crashReasons": {
+      "left_wall": "Crashed into left boundary wall",
+      "right_wall": "Crashed into right boundary wall",
+      "vehicle": "Collision with vehicle",
+      "unknown": "Crash"
+    }
   },
   "creditsInfo": {
     "title": "Credits",

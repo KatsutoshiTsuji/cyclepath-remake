@@ -73,7 +73,14 @@
   "game": {
     "loading": "読み込み中...",
     "achievementUnlocked": "実績解除！",
-    "result": "【リザルト】\n走行距離: {distance} メートル\n獲得スコア: {score}\n到達レベル: {level}\n拾ったコイン: {coins} 枚"
+    "result": "【リザルト】\n走行距離: {distance} メートル\n獲得スコア: {score}\n到達レベル: {level}\n拾ったコイン: {coins} 枚",
+    "resultWithReason": "【ゲームオーバー】\n原因: {reason}\n走行距離: {distance} メートル\n獲得スコア: {score}\n到達レベル: {level}\n拾ったコイン: {coins} 枚",
+    "crashReasons": {
+      "left_wall": "コース左端の壁に激突",
+      "right_wall": "コース右端の壁に激突",
+      "vehicle": "対向車／先行車と衝突",
+      "unknown": "衝突"
+    }
   },
   "creditsInfo": {
     "title": "クレジット",
